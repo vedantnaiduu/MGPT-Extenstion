@@ -7,20 +7,24 @@ import { useDraggable, type Position } from "~src/hooks/useDraggable";
 import { loadPosition, savePosition } from "~src/lib/storage";
 import { TOOLTIP_WIDTH, TOOLTIP_DEFAULT_PADDING } from "~src/lib/constants";
 
+// Inject on all pages
 export const config: PlasmoCSConfig = {
   matches: ["<all_urls>"],
 };
 
+// Load component styles into the shadow DOM
 export const getStyle = () => {
   const style = document.createElement("style");
   style.textContent = styleText;
   return style;
 };
 
+// Root component - loads saved position and renders the draggable tooltip
 const MathGPTOverlay = () => {
   const [initialPosition, setInitialPosition] = useState<Position>({ x: 0, y: 0 });
   const [isReady, setIsReady] = useState(false);
 
+  // Load position from storage or default to top-right corner
   useEffect(() => {
     const initPosition = async () => {
       const saved = await loadPosition();

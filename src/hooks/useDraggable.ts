@@ -14,11 +14,13 @@ interface DragState {
   height: number;
 }
 
+// Hook that handles drag-and-drop for the tooltip widget
 export const useDraggable = (initialPosition: Position, onDragEnd?: (pos: Position) => void) => {
   const [position, setPosition] = useState<Position>(initialPosition);
   const [isDragging, setIsDragging] = useState(false);
   const dragState = useRef<DragState>({ offsetX: 0, offsetY: 0, width: 0, height: 0 });
 
+  // Capture initial offset from cursor to element corner
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     const container = (e.currentTarget as HTMLElement).closest("[data-tooltip-container]");
     if (!container) return;
@@ -35,6 +37,7 @@ export const useDraggable = (initialPosition: Position, onDragEnd?: (pos: Positi
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   }, []);
 
+  // Update position while dragging, clamped to viewport bounds
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
     if (!isDragging) return;
 
@@ -45,6 +48,7 @@ export const useDraggable = (initialPosition: Position, onDragEnd?: (pos: Positi
     setPosition({ x: newX, y: newY });
   }, [isDragging]);
 
+  // End drag and trigger save callback
   const handlePointerUp = useCallback((e: React.PointerEvent) => {
     if (!isDragging) return;
 
@@ -53,10 +57,12 @@ export const useDraggable = (initialPosition: Position, onDragEnd?: (pos: Positi
     onDragEnd?.(position);
   }, [isDragging, position, onDragEnd]);
 
+  // Sync state when initial position loads from storage
   useEffect(() => {
     setPosition(initialPosition);
   }, [initialPosition.x, initialPosition.y]);
 
+  // Keep tooltip in bounds when window resizes
   useEffect(() => {
     const handleResize = () => {
       setPosition((prev) => ({

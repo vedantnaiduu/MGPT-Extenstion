@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { COLORS, PRIMARY_GRADIENT } from "../lib/constants";
 
+// Text input field for submitting math queries
 export const InputBar: React.FC = () => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -43,6 +44,7 @@ export const InputBar: React.FC = () => {
   );
 };
 
+// Circular submit button with gradient when focused
 const SubmitButton: React.FC<{ isActive: boolean }> = ({ isActive }) => (
   <button
     style={{

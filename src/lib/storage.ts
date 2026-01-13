@@ -5,10 +5,12 @@ export interface Position {
   y: number;
 }
 
+// Check if we're in a Chrome extension context
 const isChromeStorageAvailable = (): boolean => {
   return typeof chrome !== "undefined" && !!chrome.storage?.local;
 };
 
+// Persist tooltip position - uses chrome.storage in extension, localStorage as fallback
 export const savePosition = (position: Position): Promise<void> => {
   return new Promise((resolve) => {
     if (isChromeStorageAvailable()) {
@@ -20,6 +22,7 @@ export const savePosition = (position: Position): Promise<void> => {
   });
 };
 
+// Retrieve saved position from storage
 export const loadPosition = (): Promise<Position | null> => {
   return new Promise((resolve) => {
     if (isChromeStorageAvailable()) {

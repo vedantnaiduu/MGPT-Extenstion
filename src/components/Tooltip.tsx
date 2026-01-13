@@ -3,6 +3,7 @@ import { TopBar } from "./TopBar";
 import { InputBar } from "./InputBar";
 import { TOOLTIP_WIDTH, COLORS } from "../lib/constants";
 
+// Main floating widget that displays math assistance
 interface TooltipProps {
   position: { x: number; y: number };
   onPointerDown: (e: React.PointerEvent) => void;
@@ -31,6 +32,7 @@ const glassStyle: React.CSSProperties = {
   transition: "all 0.25s ease",
 };
 
+// Typography settings for the answer content
 const contentStyle: React.CSSProperties = {
   padding: "4px 20px 14px",
   color: COLORS.textPrimary,

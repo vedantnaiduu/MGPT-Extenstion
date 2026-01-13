@@ -1,6 +1,8 @@
+// Tooltip dimensions and spacing
 export const TOOLTIP_WIDTH = 400;
 export const TOOLTIP_DEFAULT_PADDING = 40;
 
+// Theme colors for the glass UI
 export const COLORS = {
   primary: "#4A9FFF",
   primaryDark: "#2D7DD2",

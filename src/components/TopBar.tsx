@@ -8,6 +8,7 @@ interface TopBarProps {
   onMinimize: () => void;
 }
 
+// Draggable header bar with logo and minimize button
 export const TopBar: React.FC<TopBarProps> = ({
   onPointerDown,
   onPointerMove,
@@ -35,6 +36,7 @@ export const TopBar: React.FC<TopBarProps> = ({
   );
 };
 
+// App icon with gradient background
 const Logo: React.FC = () => (
   <div
     style={{
@@ -73,6 +75,7 @@ const Logo: React.FC = () => (
   </div>
 );
 
+// Visual indicator that the bar is draggable
 const DragDots: React.FC = () => (
   <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
     {[0, 1, 2].map((i) => (
@@ -89,7 +92,9 @@ const DragDots: React.FC = () => (
   </div>
 );
 
+// Button to collapse/expand the tooltip content
 const MinimizeButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
+  // Prevent drag from starting when clicking the button
   const handlePointerDown = (e: React.PointerEvent) => {
     e.stopPropagation();
   };
